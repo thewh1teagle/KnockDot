@@ -3,9 +3,17 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+	  <!-- To publish just a single *.exe file -->
+	<PublishSingleFile>true</PublishSingleFile>
+	<!-- Specify for which runtime you want to publish -->
+	<RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+	<!-- Since NET 5 specify this if you want to also pack all external *.dll to your file -->
+	<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+	  <PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.8.0" />
     <PackageReference Include="SharpPcap" Version="6.0.0" />
   </ItemGroup>
 

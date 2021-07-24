@@ -16,6 +16,7 @@ namespace portKnockingServer
         private Stopwatch firstKnockTimeWatch;
 
         public PortKnocker(List<int> sequence, int period)
+            // period in seconds
         {
             this.period = period;
             this.sequence = sequence;

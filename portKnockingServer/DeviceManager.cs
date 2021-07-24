@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 
 
-namespace portKnockingServer
+namespace KnockDot
 {
     class DeviceManager
     {

@@ -1,7 +1,7 @@
 ﻿using CommandLine;
 using System.Collections.Generic;
 
-namespace portKnockingServer
+namespace KnockDot
 {
     class Options
     {

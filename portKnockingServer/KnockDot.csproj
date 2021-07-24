@@ -10,6 +10,8 @@
 	<!-- Since NET 5 specify this if you want to also pack all external *.dll to your file -->
 	<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
 	  <PublishTrimmed>true</PublishTrimmed>
+	  <RootNamespace>KnockDot</RootNamespace>
+	  <AssemblyName>KnockDot</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

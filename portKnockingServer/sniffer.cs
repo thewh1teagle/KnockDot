@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 
 
-namespace portKnockingServer
+namespace KnockDot
 {
     class Sniffer
     {

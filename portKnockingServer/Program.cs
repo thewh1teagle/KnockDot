@@ -4,7 +4,7 @@ using CommandLine;
 using System.Linq;
 
 
-namespace portKnockingServer
+namespace KnockDot
 {
     public class Program
     {

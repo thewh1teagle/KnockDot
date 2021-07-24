@@ -2,7 +2,7 @@
 using System.Diagnostics;
 
 
-namespace portKnockingServer
+namespace KnockDot
 {
     class Commander
     {

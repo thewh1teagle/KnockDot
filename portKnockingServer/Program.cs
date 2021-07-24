@@ -1,45 +1,40 @@
-﻿using System;
-using SharpPcap;
-using SharpPcap.LibPcap;
-using PacketDotNet;
-using PacketDotNet.Tcp;
-using PacketDotNet.Utils;
+﻿using SharpPcap;
 using System.Collections.Generic;
 using CommandLine;
-using System.Net.NetworkInformation;
 using System.Linq;
-using System.Collections;
-using System.Diagnostics;
+
 
 namespace portKnockingServer
 {
     public class Program
     {
-       
-        static PortKnocker portKnocker;
-        static string execCommand;
-
-
         public static void Main(string[] args)
         {
-            
             Parser.Default.ParseArguments<Options>(args)
             .WithParsed<Options>(opts =>
                 {
-                    if (opts.listInterfaces)
+                    if (opts.ListInterfaces)
                     {
-
-                        DeviceManager.printDevices();
+                        DeviceManager.PrintDevices();
                         System.Environment.Exit(0);
                     }
                     IEnumerable<string> ports = opts.Ports;
                     string protocol = opts.protocol;
-                    ICaptureDevice interfaceResult = DeviceManager.getDefaultDevice();
+
+                    ICaptureDevice interfaceResult;
+                    if (opts.InterfaceIdx != null)
+                    {
+                        interfaceResult = DeviceManager.GetInterfaceByIndex(opts.InterfaceIdx - 1); // uman index..
+                    } 
+                    else
+                    {
+                        interfaceResult = DeviceManager.GetDefaultDevice();
+                    }
                     List<int> intPorts = ports.ToList().Select(int.Parse).ToList();
-                    portKnocker = new PortKnocker(intPorts, 60);
-                    Sniffer sniffer = new Sniffer(portKnocker, opts.exec);
+                    PortKnocker portKnocker = new PortKnocker(intPorts, 60);
+                    Sniffer sniffer = new Sniffer(portKnocker, opts.Exec);
                     string filterString = Sniffer.GenerateFilterString(ports, protocol);
-                    Sniffer.sniff(interfaceResult, filterString);
+                    sniffer.Sniff(interfaceResult, filterString);
                 });            
         }
     }

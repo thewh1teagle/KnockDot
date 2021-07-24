@@ -1,41 +1,42 @@
 ﻿using CommandLine;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace portKnockingServer
 {
     class Options
     {
-        [Option('p', "port", Required = true, HelpText = "Ports sequence", Min = 2)]
+        
+        [Option('p', "port", Required = true, HelpText = "Ports sequence", Min = 2, SetName = "config")]
         public IEnumerable<string> Ports { get; set; }
 
         [Option('e', "exec",
         Required = true,
-        HelpText = "command to execute after the knock")]
-        public string exec { get; set; }
+        HelpText = "command to execute after the knock", SetName = "config")]
+        public string Exec { get; set; }
 
         [Option('t', "timeout",
         Required = true,
-        HelpText = "sequence timeout")]
-        public int seq_timeout { get; set; }
+        HelpText = "sequence timeout", SetName= "config")]
+        public int SeqTimeout { get; set; }
 
 
-        [Option('i', "interface",
+        [Option('i', "interface, number",
         Required = false,
-        HelpText = "interface name")]
-        public string Interface { get; set; }
+        HelpText = "interface name (number), get all interfaces by -l option", SetName = "config")]
+        public int InterfaceIdx { get; set; }
 
-        [Option('l', "list",
-        Required = false,
-        HelpText = "list all availaible interfaces", Group = "hello")]
-        public bool listInterfaces { get; set; }
 
         [Option("protocol",
+          Required =false,
           Default = "tcp",
-          HelpText = "tcp or udp", Group = "hello")]
+          HelpText = "tcp or udp", SetName = "config")]
         public string protocol { get; set; }
+
+        [Option('l', "list",
+        Required = true,
+        HelpText = "list all availaible interfaces", SetName = "help")]
+        public bool ListInterfaces { get; set; }
+
+
     }
 }

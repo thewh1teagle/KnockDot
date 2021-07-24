@@ -2,23 +2,20 @@
 using SharpPcap;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace portKnockingServer
 {
     class Sniffer
     {
 
-        static PortKnocker portKnocker;
-        static string execCommand;
+        PortKnocker _portKnocker;
+        string _execCommand;
 
         public Sniffer(PortKnocker portKnocker, string execCommand)
         {
-            portKnocker = portKnocker;
-            execCommand = execCommand;
+            _portKnocker = portKnocker;
+            _execCommand = execCommand;
         }
 
         public static string GenerateFilterString(IEnumerable ports, string protocol)
@@ -34,14 +31,14 @@ namespace portKnockingServer
 
 
 
-        public static void sniff(ICaptureDevice device, string filter)
+        public void Sniff(ICaptureDevice device, string filter)
         {
 
             // using var device = 1//devices[i];
 
             //Register our handler function to the 'packet arrival' event
             device.OnPacketArrival +=
-                new PacketArrivalEventHandler(device_OnPacketArrival);
+                new PacketArrivalEventHandler(Device_OnPacketArrival);
 
             //Open the device for capturing
             int readTimeoutMilliseconds = 1000;
@@ -63,15 +60,15 @@ namespace portKnockingServer
 
         }
 
-        private static void device_OnPacketArrival(object sender, PacketCapture e)
+        private void Device_OnPacketArrival(object sender, PacketCapture e)
         {
             // var time = e.Header.Timeval.Date;
             // var len = e.Data.Length;
             var destinationPort = e.GetPacket().GetPacket().Extract<TcpPacket>().DestinationPort;
             Console.WriteLine(destinationPort);
-            if (portKnocker.check(destinationPort))
+            if (_portKnocker.Check(destinationPort))
             {
-                Commander.RunCommand(execCommand, false);
+                Commander.RunCommand(_execCommand, false);
             }
 
 

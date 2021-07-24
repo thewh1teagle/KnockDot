@@ -1,16 +1,14 @@
 ﻿using SharpPcap;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace portKnockingServer
 {
     class DeviceManager
     {
-        public static ICaptureDevice getDefaultDevice()
+        public static ICaptureDevice GetDefaultDevice()
         {
             // find default interface then convert to Icapturedevice
             var nic = NetworkInterface
@@ -33,7 +31,19 @@ namespace portKnockingServer
             return device;
         }
 
-        public static void printDevices()
+
+        public static ICaptureDevice GetInterfaceByIndex(int index)
+        {
+            var devices = CaptureDeviceList.Instance;
+            if (devices.Count < 1)
+            {
+                Console.WriteLine("No devices were found on this machine");
+                return null;
+            }
+            return devices[index];
+
+        }
+        public static void PrintDevices()
         {
             // Retrieve the device list
             var devices = CaptureDeviceList.Instance;
@@ -52,7 +62,7 @@ namespace portKnockingServer
             // Scan the list printing every entry
             foreach (var dev in devices)
             {
-                Console.WriteLine("{0}) {1}", i, dev.Description);
+                Console.WriteLine("{0}. {1}", i + 1, dev.Description);
                 i++;
             }
         }

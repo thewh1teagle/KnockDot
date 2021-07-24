@@ -1,10 +1,6 @@
-﻿using System;
-using System.Globalization;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace portKnockingServer
 {
@@ -24,7 +20,7 @@ namespace portKnockingServer
             // firstKnockTimeWatch = 0;
         }
 
-        public bool check(int port)
+        public bool Check(int port)
         {
             if (this.sequenceIndex == 0 && port == this.sequence[this.sequenceIndex]) // first correct knocking
             {   

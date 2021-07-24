@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace portKnockingServer
 {
     class Commander
     {
-
         public static string RunCommand(string arguments, bool readOutput)
         {
             var output = string.Empty;
